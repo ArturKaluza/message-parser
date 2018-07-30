@@ -7,7 +7,18 @@ class Github extends Component {
     this.state = {
       commits: []
     }
+
+    this.fetchCommits = this.fetchCommits.bind(this)
   }
+
+  componentDidMount() {
+    this.fetchCommits();
+  }
+
+  fetchCommits() {
+    console.log('work')
+  }
+
 
   render() {
     return (
