@@ -4,15 +4,19 @@ import { Grid } from 'semantic-ui-react'
 
 import Slack from '../components/Slack/Slack';
 import Github from '../components/Github/Github';
+import Jira from '../components/Jira/Jira';
 
 class Main extends Component {
   constructor() {
     super();
 
-    this.state = {
-      messages: [],
-      commits: []
-    }
+    this.state = {};
+
+    this.filterJiraTask = this.filterJiraTask.bind(this);
+  }
+
+  filterJiraTask(id) {
+    console.log(id);
   }
 
   render() {
@@ -23,7 +27,7 @@ class Main extends Component {
           <Grid.Row>
             
             <Grid.Column>
-             <div><h2>Jira</h2></div>
+              <Jira jiraTask={this.filterJiraTask} />
             </Grid.Column>
 
             <Grid.Column>

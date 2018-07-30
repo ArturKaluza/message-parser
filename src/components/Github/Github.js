@@ -41,8 +41,8 @@ class Github extends Component {
         <div className='column__header'>
           <p>Github</p>
         </div>
-        {this.state.commits.map(item => <Commit 
-          
+        {this.state.commits.map((item, index) => <Commit 
+          key={index}
           id={item.sha}
           message={item.message}          
           />
