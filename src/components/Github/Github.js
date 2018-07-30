@@ -11,7 +11,9 @@ class Github extends Component {
 
   render() {
     return (
-      <p>Github</p>
+      <div>
+        <p>Github</p>
+      </div>
     )
   }
 }
