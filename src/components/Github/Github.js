@@ -9,7 +9,8 @@ class Github extends Component {
     super()
 
     this.state = {
-      commits: []
+      commits: [],
+      activeTask: false
     }
 
     this.fetchCommits = this.fetchCommits.bind(this)
@@ -19,12 +20,16 @@ class Github extends Component {
     this.fetchCommits();
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({activeTask: newProps.handleActiveTask})
+  }
+
   fetchCommits() {
     axios.get('https://api.github.com/repos/ArturKaluza/alm/commits')
       .then(response => {
         const arr = response.data.map(commit => {
           const date = {}
-
+          
           date.sha = commit.sha;
           date.message = commit.commit.message;
                   
@@ -33,7 +38,6 @@ class Github extends Component {
         this.setState({commits: arr})
       })
   }
-
 
   render() {
     return (
@@ -44,7 +48,9 @@ class Github extends Component {
         {this.state.commits.map((item, index) => <Commit 
           key={index}
           id={item.sha}
-          message={item.message}          
+          message={item.message}
+          activeTask ={this.state.activeTask}
+          
           />
         )}
       </div>

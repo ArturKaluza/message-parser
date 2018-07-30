@@ -10,16 +10,19 @@ class Main extends Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      activeTask: false
+    };
 
     this.filterJiraTask = this.filterJiraTask.bind(this);
   }
 
   filterJiraTask(id) {
-    console.log(id);
+    this.setState({activeTask: id})
   }
 
   render() {
+    
     return (
       <div>
          
@@ -27,7 +30,7 @@ class Main extends Component {
           <Grid.Row>
             
             <Grid.Column>
-              <Jira jiraTask={this.filterJiraTask} />
+              <Jira jiraTask={this.filterJiraTask} handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 
             <Grid.Column>
@@ -35,7 +38,7 @@ class Main extends Component {
             </Grid.Column>
             
             <Grid.Column>
-              <Github />
+              <Github  handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 
           </Grid.Row>
