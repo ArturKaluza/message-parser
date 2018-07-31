@@ -28,8 +28,9 @@ export default class LoadingPage extends Component {
       if(response.data.ok) {
         asyncLocalStorage.setItem('token', response.data.access_token)
         .then(() => this.props.history.push("/"))
+      } else {
+        this.props.history.push("/")
       }
-      this.props.history.push("/")
     })
   }
   render() {
