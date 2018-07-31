@@ -3,6 +3,7 @@ import { List, Segment, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import './Slack.css'
 import Loader from '../Loader/Loader'
+import SlackMessage from '../SlackMessage/SlackMessage'
 
 import TestComponent from '../TestComponent/TestComponent';
 
@@ -15,6 +16,9 @@ class Slack extends Component {
       users: [],
       isLoading: false
     }
+  }
+  randomNum() {
+    return Math.floor(Math.random() * 3) + 1;
   }
 
   getMessages(token) {
@@ -29,7 +33,11 @@ class Slack extends Component {
     }
     return axios.get('https://slack.com/api/channels.history', config)
     .then(response => {
-      this.setState({ messages: response.data.messages.reverse(), isLoading: false  })
+      const messages = response.data.messages.map(message => {
+        message.id = this.randomNum();
+        return message;
+      })
+      this.setState({ messages: messages.reverse(), isLoading: false  })
     })
   }
 
@@ -58,26 +66,14 @@ class Slack extends Component {
   }
   componentDidMount() {
     const token = localStorage.getItem('token');
-    console.log(token)
     if(token) {
       return this.getMessages(token)
       .then(this.getUsers(token))
     }
   }
 
-  renderMessage(data) {
-    return (
-      <List.Item key={data.ts}>
-        <List.Icon name='github' size='large' verticalAlign='middle' />
-        <List.Content>
-          <List.Header as='a'>{ data.name || ''}</List.Header>
-          <List.Description as='a'>{ data.text }</List.Description>
-        </List.Content>
-      </List.Item>
-    )
-  }
-
   render() {
+    console.log(this.props.activeTask)
     return (
       <Fragment>
         <div className='column__header'>
@@ -89,7 +85,14 @@ class Slack extends Component {
         <Segment>
           <Loader isLoading={this.state.isLoading} />
           <List divided relaxed>
-            { this.state.messages.map(this.renderMessage) }
+            { this.state.messages.map(message => {
+              return (
+              <SlackMessage
+                data={message}
+                activeTask={this.props.handleActiveTask}
+              />
+              )
+            })}
             <List.Item>
               <TestComponent/>
             </List.Item>

@@ -35,7 +35,7 @@ class Main extends Component {
             </Grid.Column>
 
             <Grid.Column>
-              <Slack />
+              <Slack handleActiveTask={this.state.activeTask}/>
             </Grid.Column>
             
             <Grid.Column>
