@@ -13,7 +13,8 @@ class Github extends Component {
       activeTask: false
     }
 
-    this.fetchCommits = this.fetchCommits.bind(this)
+    this.fetchCommits = this.fetchCommits.bind(this);
+    this.randomNum = this.randomNum.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,10 @@ class Github extends Component {
       })
   }
 
+  randomNum() {
+    return Math.floor(Math.random() * 3) + 1;
+  }
+
   render() {
     return (
       <div>
@@ -50,6 +55,7 @@ class Github extends Component {
           id={item.sha}
           message={item.message}
           activeTask ={this.state.activeTask}
+          taskID={this.randomNum()}
           
           />
         )}
@@ -59,3 +65,6 @@ class Github extends Component {
 }
 
 export default Github;
+
+
+ 
