@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react'
 
 import Slack from '../components/Slack/Slack';
 import Github from '../components/Github/Github';
+import BitBucket from '../components/BitBucket/BitBucket';
 import Jira from '../components/Jira/Jira';
 
 class Main extends Component {
@@ -26,7 +27,7 @@ class Main extends Component {
     return (
       <div>
          
-         <Grid columns={3} divided>
+         <Grid columns={4} divided>
           <Grid.Row>
             
             <Grid.Column>
@@ -39,6 +40,10 @@ class Main extends Component {
             
             <Grid.Column>
               <Github  handleActiveTask={this.state.activeTask} />
+            </Grid.Column>
+
+            <Grid.Column>
+              <BitBucket  handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 
           </Grid.Row>

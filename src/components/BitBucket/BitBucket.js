@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Github.css';
+import './BitBucket.css';
 
 import Commit from '../Commit/Commit';
 
-class Github extends Component {
+class BitBucket extends Component {
   constructor() {
     super()
 
     this.state = {
       commits: [],
-      activeTask: false
+      activeTask: false,
+      repoName: ''
     }
 
     this.fetchCommits = this.fetchCommits.bind(this);
@@ -26,19 +27,19 @@ class Github extends Component {
   }
 
   fetchCommits() {
-    axios.get('https://api.github.com/repos/ArturKaluza/alm/commits')
+    axios.get('https://api.bitbucket.org/2.0/repositories/ArturKaluza/testRepo/commits')
       .then(response => {
-        const arr = response.data.map(commit => {
-          console.log(commit)
+        console.log(response.data.values)
+        const arr = response.data.values.map(commit => {
           const date = {}
           
-          date.sha = commit.sha;
-          date.message = commit.commit.message;
+          date.sha = commit.hash;
+          date.message = commit.message;
           date.taskID = this.randomNum()
                   
         return date;
         })
-        this.setState({commits: arr})
+        this.setState({commits: arr, repoName: response.data.values[0].repository.name})
       })
   }
 
@@ -50,8 +51,8 @@ class Github extends Component {
     return (
       <div>
         <div className='column__header'>
-          <h2>Github</h2>
-          <h3>Repozitory name: alm</h3>
+          <h2>BitBucket</h2>
+          <h3>Repozitory name: {this.state.repoName}</h3>
         </div>
         {this.state.commits.map((item, index) => <Commit 
           key={index}
@@ -67,7 +68,4 @@ class Github extends Component {
   }
 }
 
-export default Github;
-
-
- 
+export default BitBucket;
