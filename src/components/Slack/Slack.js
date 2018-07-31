@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { List, Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { List, Dimmer, Loader, Segment, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import './Slack.css'
+
+import TestComponent from '../TestComponent/TestComponent';
 
 class Slack extends Component {
   constructor() {
@@ -14,13 +16,13 @@ class Slack extends Component {
     }
   }
 
-  getMessages() {
+  getMessages(token) {
     const config = {
       headers: { 
         'Content-Type':'application/x-www-form-urlencoded',
       },
       params: {
-        token: 'xoxp-405795262034-405660880195-405558814996-c2f88f4ec95d42fce48c4b7302f6b9dd',
+        token,
         channel: 'CBX71C4AD'
       }
     }
@@ -30,15 +32,14 @@ class Slack extends Component {
     })
   }
 
-  getUsers() {
+  getUsers(token) {
     this.setState({ isLoading: true })
-
     const config = {
       headers: { 
         'Content-Type':'application/x-www-form-urlencoded',
       },
       params: {
-        token: 'xoxp-405795262034-405660880195-405558814996-c2f88f4ec95d42fce48c4b7302f6b9dd',
+        token
       }
     }
     return axios.get('https://slack.com/api/users.list', config)
@@ -55,14 +56,16 @@ class Slack extends Component {
     })
   }
   componentDidMount() {
-    this.getMessages()
-    .then(this.getUsers())
-
+    const token = localStorage.getItem('token');
+    if(token) {
+      return this.getMessages(token)
+      .then(this.getUsers(token))
+    }
   }
 
   renderMessage(data) {
     return (
-      <List.Item>
+      <List.Item key={data.ts}>
         <List.Icon name='github' size='large' verticalAlign='middle' />
         <List.Content>
           <List.Header as='a'>{ data.name || ''}</List.Header>
@@ -78,12 +81,18 @@ class Slack extends Component {
         <div className='column__header'>
           <p>Slack</p>
         </div>
+        <a href="https://slack.com/oauth/authorize?client_id=405795262034.405661432179&scope=chat:write:user,channels:history,users:read,users.profile:read">
+          <Button primary>Add workspace</Button>
+        </a>
         <Segment>
           <Dimmer inverted active={this.state.isLoading}>
             <Loader />
           </Dimmer>
           <List divided relaxed>
             { this.state.messages.map(this.renderMessage) }
+            <List.Item>
+              <TestComponent/>
+            </List.Item>
           </List>
         </Segment>
       </Fragment>
