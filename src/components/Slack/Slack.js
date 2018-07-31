@@ -33,6 +33,7 @@ class Slack extends Component {
     }
     return axios.get('https://slack.com/api/channels.history', config)
     .then(response => {
+      console.log(response)
       const messages = response.data.messages.map(message => {
         message.id = this.randomNum();
         return message;
@@ -73,15 +74,14 @@ class Slack extends Component {
   }
 
   render() {
-    console.log(this.props.activeTask)
     return (
       <Fragment>
         <div className='column__header'>
-          <p>Slack</p>
-        </div>
-        <a href="https://slack.com/oauth/authorize?client_id=405795262034.405661432179&scope=chat:write:user,channels:history,users:read,users.profile:read">
+          <h2>Slack</h2>
+          <a href="https://slack.com/oauth/authorize?client_id=405795262034.405661432179&scope=chat:write:user,channels:history,users:read,users.profile:read">
           <Button primary>Add workspace</Button>
         </a>
+        </div>
         <Segment>
           <Loader isLoading={this.state.isLoading} />
           <List divided relaxed>

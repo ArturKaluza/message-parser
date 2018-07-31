@@ -4,7 +4,7 @@ import './Commit.css';
 
 const Commit = (props) => {
   return (
-    <List.Item className={props.activeTask === props.taskID ? 'Commit active' : 'Commit'}>
+    <List.Item className={props.activeTask === props.taskID ? 'Commit list-item__active' : 'Commit'}>
       <List.Content>
         <List.Description as='a' className='black'>{ props.message }</List.Description>
       </List.Content>

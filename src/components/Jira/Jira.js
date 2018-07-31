@@ -28,14 +28,14 @@ class Jira extends Component {
   render() {
     return (
       <div className='Jira'>
-        <div className='Jira__title'>
+        <div className='column__header'>
           <h2>Jira</h2>
         </div>
   
         <div className='Jira__list'>
-          <div className={this.state.activeTask === 1 ? 'Jira__item active' : 'Jira__item'} onClick={() => this.props.jiraTask(1)}>Task 1</div>
-          <div className={this.state.activeTask === 2 ? 'Jira__item active' : 'Jira__item'}  onClick={() => this.props.jiraTask(2)}>Task 2</div>
-          <div className={this.state.activeTask === 3 ? 'Jira__item active' : 'Jira__item'} onClick={() => this.props.jiraTask(3)}>Task 3</div>
+          <div className={this.state.activeTask === 1 ? 'Jira__item list-item__active' : 'Jira__item'} onClick={() => this.props.jiraTask(1)}>Task 1</div>
+          <div className={this.state.activeTask === 2 ? 'Jira__item list-item__active' : 'Jira__item'}  onClick={() => this.props.jiraTask(2)}>Task 2</div>
+          <div className={this.state.activeTask === 3 ? 'Jira__item list-item__active' : 'Jira__item'} onClick={() => this.props.jiraTask(3)}>Task 3</div>
         </div>
       </div>
     )
