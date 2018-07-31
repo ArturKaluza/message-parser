@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import './Github.css';
+import Loader from '../Loader/Loader'
 
 import Commit from '../Commit/Commit';
 
@@ -17,7 +18,6 @@ class Github extends Component {
 
     this.fetchCommits = this.fetchCommits.bind(this);
     this.randomNum = this.randomNum.bind(this);
-    this.loader = this.loader.bind(this);
   }
 
   componentDidMount() {
@@ -42,16 +42,6 @@ class Github extends Component {
         })
         this.setState({commits: arr, isLoading: false})
       })
-  }
-
-  loader() {
-    return (
-      <Segment>
-        <Dimmer inverted active={this.state.isLoading}>
-          <Loader />
-        </Dimmer>
-      </Segment>
-    )    
   }
 
   randomNum() {
@@ -82,8 +72,10 @@ class Github extends Component {
           <h2>Github</h2>
           <h3>Repozitory name: alm</h3>
         </div>
-
-        {this.state.isLoading ? this.loader() : this.renderGithub()}
+        <Segment>
+          <Loader isLoading={this.state.isLoading} />
+          {this.renderGithub()}
+        </Segment>
       </div>
     )
   }

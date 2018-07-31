@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import './BitBucket.css';
+import Loader from '../Loader/Loader';
 
 import Commit from '../Commit/Commit';
 
@@ -18,8 +19,6 @@ class BitBucket extends Component {
 
     this.fetchCommits = this.fetchCommits.bind(this);
     this.randomNum = this.randomNum.bind(this);
-    this.loader = this.loader.bind(this);
-    this.renderBitBucket = this.renderBitBucket.bind(this);
   }
 
   componentDidMount() {
@@ -44,16 +43,6 @@ class BitBucket extends Component {
         })
         this.setState({commits: arr, repoName: response.data.values[0].repository.name, isLoading: false})
       })
-  }
-
-  loader() {
-    return (
-      <Segment>
-        <Dimmer inverted active={this.state.isLoading}>
-          <Loader />
-        </Dimmer>
-      </Segment>
-    )    
   }
 
   randomNum() {
@@ -81,8 +70,11 @@ class BitBucket extends Component {
         <div className='column__header'>
           <h2>BitBucket</h2>
           <h3>Repozitory name: {this.state.repoName}</h3>
-      </div>
-        {this.state.isLoading ? this.loader() : this.renderBitBucket()}
+        </div>
+        <Segment>
+          <Loader isLoading={this.state.isLoading} />
+          {this.renderBitBucket()}
+        </Segment>
       </div>
     )
   }
