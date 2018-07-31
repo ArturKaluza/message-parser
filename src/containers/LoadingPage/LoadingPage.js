@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import axios from 'axios';
+import asyncLocalStorage from '../../utils/asyncLocalStorage'
 
 export default class LoadingPage extends Component {
 
@@ -24,9 +25,12 @@ export default class LoadingPage extends Component {
     }
     return axios.get('https://slack.com/api/oauth.access?', config)
     .then(response => {
-      localStorage.setItem('token', response.data.access_token)
+      if(response.data.ok) {
+        asyncLocalStorage.setItem('token', response.data.access_token)
+        .then(() => this.props.history.push("/"))
+      }
+      this.props.history.push("/")
     })
-    .then(this.props.history.push("/"))
   }
   render() {
 

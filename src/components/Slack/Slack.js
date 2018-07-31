@@ -57,6 +57,7 @@ class Slack extends Component {
   }
   componentDidMount() {
     const token = localStorage.getItem('token');
+    console.log(token)
     if(token) {
       return this.getMessages(token)
       .then(this.getUsers(token))
