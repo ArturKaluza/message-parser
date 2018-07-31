@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { List, Dimmer, Loader, Segment, Button } from 'semantic-ui-react';
+import { List, Segment, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import './Slack.css'
+import Loader from '../Loader/Loader'
 
 import TestComponent from '../TestComponent/TestComponent';
 
@@ -86,9 +87,7 @@ class Slack extends Component {
           <Button primary>Add workspace</Button>
         </a>
         <Segment>
-          <Dimmer inverted active={this.state.isLoading}>
-            <Loader />
-          </Dimmer>
+          <Loader isLoading={this.state.isLoading} />
           <List divided relaxed>
             { this.state.messages.map(this.renderMessage) }
             <List.Item>
