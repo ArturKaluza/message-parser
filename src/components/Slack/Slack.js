@@ -116,12 +116,12 @@ class Slack extends Component {
             <Button primary>Add/Change workspace</Button>
           </a>
           {this.state.channels.length !==0 &&
-            <Form onSubmit={this.handleSubmit} style={{marginTop: '5px', display: 'flex', justifyContent: 'center'}}>
+            (<Form onSubmit={this.handleSubmit} style={{marginTop: '5px', display: 'flex', justifyContent: 'center'}}>
               <Form.Group>
-                <Form.Select options={this.state.channels} placeholder='Channels' name='channel' value={this.state.channel} onChange={this.handleChange}/>
+                <Form.Select defaultValue={0} options={this.state.channels} placeholder='Channels' name='channel' value={this.state.channel} onChange={this.handleChange}/>
                 <Form.Button content='Submit' />
               </Form.Group>
-            </Form>
+            </Form>)
           }
         </div>
         <Segment>
