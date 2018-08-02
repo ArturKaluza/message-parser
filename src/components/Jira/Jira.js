@@ -31,9 +31,11 @@ class Jira extends Component {
   }
 
   getProjectList() {
-    axios.get('https://supportdesk.almservices.pl/rest/api/2/project/', {
+    axios.get('/rest/api/2/project/', {
       headers: {
-        Authorization: 'Basic YXJ0dXIua2FsdXphOmFzZHp4YzEx'
+        "Authorization": 'Basic YXJ0dXIua2FsdXphOmFzZHp4YzEx',
+        "Access-Control-Allow-Origin": '*',
+        "Access-Control-Allow-Headers": 'Origin, Content-Type, X-Auth-Token'
       }
     }).then(res => {
       const projectArray = []
@@ -42,6 +44,7 @@ class Jira extends Component {
       this.setState({projects: projectArray})
      
     })
+    .catch(e => console.log(e));
   }
    
 
