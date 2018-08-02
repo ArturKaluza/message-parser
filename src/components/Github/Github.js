@@ -76,7 +76,7 @@ class Github extends Component {
           <h2>Github</h2>
           <h3>Repozitory name: alm</h3>
         </div>
-        <Segment>
+        <Segment color='black'>
           <Loader isLoading={this.state.isLoading} />
           {this.renderGithub()}
         </Segment>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Jira.css';
+import { List, Segment } from 'semantic-ui-react';
+
 
 class Jira extends Component {
   constructor(props) {
@@ -54,18 +56,19 @@ class Jira extends Component {
         <div className='column__header'>
           <h2>Jira</h2>
         </div>
-  
-        <div className='Jira__list'>
-          {this.state.projects.map((item, index) => <div 
-            className={this.state.activeTask === (index + 1) ? 'Jira__item list-item__active' : 'Jira__item'}
-            key={index}
-            onClick={() => this.props.jiraTask(index + 1)}
-            > 
-            {item.name}
+        <Segment color='violet'>
+          <List>
+            {this.state.projects.map((item, index) => <div 
+              className={this.state.activeTask === (index + 1) ? 'Jira__item list-item__active' : 'Jira__item'}
+              key={index}
+              onClick={() => this.props.jiraTask(index + 1)}
+              > 
+              {item.name}
 
-          </div>
-          )}
-        </div>
+            </div>
+            )}
+          </List>
+        </Segment>
 
       {/* //   <div className='Jira__list'>
       //     <div className={this.state.activeTask === 1 ? 'Jira__item list-item__active' : 'Jira__item'} onClick={() => this.props.jiraTask(1)}>Task 1</div>

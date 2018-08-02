@@ -5,7 +5,7 @@ import './Slack.css'
 import Loader from '../Loader/Loader'
 import SlackMessage from '../SlackMessage/SlackMessage'
 
-import TestComponent from '../TestComponent/TestComponent';
+// import TestComponent from '../TestComponent/TestComponent';
 
 class Slack extends Component {
   constructor() {
@@ -118,13 +118,13 @@ class Slack extends Component {
           {this.state.channels.length !==0 &&
             (<Form onSubmit={this.handleSubmit} style={{marginTop: '5px', display: 'flex', justifyContent: 'center'}}>
               <Form.Group>
-                <Form.Select defaultValue={0} options={this.state.channels} placeholder='Channels' name='channel' value={this.state.channel} onChange={this.handleChange}/>
+                <Form.Select placeholder="Select channel" defaultValue={0} options={this.state.channels} name='channel' value={this.state.channel} onChange={this.handleChange}/>
                 <Form.Button content='Submit' />
               </Form.Group>
             </Form>)
           }
         </div>
-        <Segment>
+        <Segment color='orange'>
           <Loader isLoading={this.state.isLoading} />
           <List divided relaxed>
             { this.state.messages.map(message => {
