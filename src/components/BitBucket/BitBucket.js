@@ -55,6 +55,7 @@ class BitBucket extends Component {
       <List>
       {this.state.commits.map((item, index) => <Commit 
         key={index}
+        avatar="https://avatars1.githubusercontent.com/u/30526557?v=4"
         author={item.author}
         id={item.sha}
         message={item.message}
@@ -73,7 +74,7 @@ class BitBucket extends Component {
           <h2>BitBucket</h2>
           <h3>Repozitory name: {this.state.repoName}</h3>
         </div>
-        <Segment>
+        <Segment color='blue'>
           <Loader isLoading={this.state.isLoading} />
           {this.renderBitBucket()}
         </Segment>
