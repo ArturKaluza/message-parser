@@ -26,8 +26,12 @@ class Main extends Component {
     
     return (
       <div>
+
+         <div className='title'>
+            <h1>Message-Parse-App </h1>
+        </div>
          
-         <Grid columns={4} divided>
+         <Grid columns={4} divided >
           <Grid.Row>
             
             <Grid.Column>

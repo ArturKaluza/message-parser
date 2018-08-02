@@ -55,9 +55,11 @@ class Jira extends Component {
       <div className='Jira'>
         <div className='column__header'>
           <h2>Jira</h2>
+          
         </div>
         <Segment color='violet'>
-          <List>
+          <List className='center'>
+            <h3 calssName='list__header'>Choose project</h3>
             {this.state.projects.map((item, index) => <div 
               className={this.state.activeTask === (index + 1) ? 'Jira__item list-item__active' : 'Jira__item'}
               key={index}
@@ -70,11 +72,6 @@ class Jira extends Component {
           </List>
         </Segment>
 
-      {/* //   <div className='Jira__list'>
-      //     <div className={this.state.activeTask === 1 ? 'Jira__item list-item__active' : 'Jira__item'} onClick={() => this.props.jiraTask(1)}>Task 1</div>
-      //     <div className={this.state.activeTask === 2 ? 'Jira__item list-item__active' : 'Jira__item'}  onClick={() => this.props.jiraTask(2)}>Task 2</div>
-      //     <div className={this.state.activeTask === 3 ? 'Jira__item list-item__active' : 'Jira__item'} onClick={() => this.props.jiraTask(3)}>Task 3</div>
-      //   </div> */}
       </div>
     )
   }  
