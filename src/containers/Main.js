@@ -34,19 +34,19 @@ class Main extends Component {
          <Grid columns={4} divided >
           <Grid.Row>
             
-            <Grid.Column>
+            <Grid.Column className="tool-container">
               <Jira jiraTask={this.filterJiraTask} handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column className="tool-container">
               <Slack handleActiveTask={this.state.activeTask}/>
             </Grid.Column>
             
-            <Grid.Column>
+            <Grid.Column className="tool-container">
               <Github  handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column className="tool-container">
               <BitBucket  handleActiveTask={this.state.activeTask} />
             </Grid.Column>
 

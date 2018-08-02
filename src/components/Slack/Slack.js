@@ -112,11 +112,11 @@ class Slack extends Component {
       <Fragment>
         <div className='column__header'>
           <h2>Slack</h2>
-            <a href="https://slack.com/oauth/authorize?client_id=405795262034.405661432179&scope=chat:write:user,channels:history,users:read,users.profile:read,channels:read">
+          <a href="https://slack.com/oauth/authorize?client_id=405795262034.405661432179&scope=chat:write:user,channels:history,users:read,users.profile:read,channels:read">
             <Button primary>Add/Change workspace</Button>
           </a>
           {this.state.channels.length !==0 &&
-            (<Form onSubmit={this.handleSubmit} style={{marginTop: '5px', display: 'flex', justifyContent: 'center'}}>
+            (<Form onSubmit={this.handleSubmit} style={{marginTop: '5px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}}>
               <Form.Group>
                 <Form.Select placeholder="Select channel" defaultValue={0} options={this.state.channels} name='channel' value={this.state.channel} onChange={this.handleChange}/>
                 <Form.Button content='Submit' />
