@@ -1,4 +1,3 @@
-.Main__container {
-  display: flex;
-  color: red;
+.main-container {
+  padding: 5px;
 }

@@ -40,6 +40,7 @@ class Jira extends Component {
         "Access-Control-Allow-Headers": 'Origin, Content-Type, X-Auth-Token'
       }
     }).then(res => {
+      console.log(res)
       const projectArray = []
 
       projectArray.push(res.data[2], res.data[8], res.data[9]);
@@ -58,14 +59,14 @@ class Jira extends Component {
         </div>
         <Segment color='violet'>
           <List>
-            {this.state.projects.map((item, index) => <div 
-              className={this.state.activeTask === (index + 1) ? 'Jira__item list-item__active' : 'Jira__item'}
+            {this.state.projects.map((item, index) => <List.Item
+              className={this.state.activeTask === (index + 1) ? 'Jira__item list-item list-item__active' : 'list-item Jira__item'}
               key={index}
               onClick={() => this.props.jiraTask(index + 1)}
               > 
               {item.name}
 
-            </div>
+            </List.Item>
             )}
           </List>
         </Segment>
