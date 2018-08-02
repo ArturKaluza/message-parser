@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment } from 'semantic-ui-react';
+import { Segment, List } from 'semantic-ui-react';
 import './Github.css';
 import Loader from '../Loader/Loader'
 
@@ -31,9 +31,11 @@ class Github extends Component {
   fetchCommits() {
     axios.get('https://api.github.com/repos/ArturKaluza/alm/commits')
       .then(response => {
+        console.log(response.data)
         const arr = response.data.map(commit => {
           const date = {}
-          
+          date.avatarUrl = commit.author.avatar_url
+          date.author = commit.author.login
           date.sha = commit.sha;
           date.message = commit.commit.message;
           date.taskID = this.randomNum()
@@ -50,10 +52,12 @@ class Github extends Component {
 
   renderGithub() {
     return (
-      <div>
+      <List>
        
         {this.state.commits.map((item, index) => <Commit 
           key={index}
+          avatar={item.avatarUrl}
+          author={item.author}
           id={item.sha}
           message={item.message}
           activeTask ={this.state.activeTask}
@@ -61,7 +65,7 @@ class Github extends Component {
           
           />
         )}
-      </div>
+      </List>
     )
   }
 

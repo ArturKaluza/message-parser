@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment } from 'semantic-ui-react';
+import { Segment, List } from 'semantic-ui-react';
 import './BitBucket.css';
 import Loader from '../Loader/Loader';
 
@@ -32,9 +32,10 @@ class BitBucket extends Component {
   fetchCommits() {
     axios.get('https://api.bitbucket.org/2.0/repositories/ArturKaluza/testRepo/commits')
       .then(response => {
+        console.log(response)
         const arr = response.data.values.map(commit => {
           const date = {}
-          
+          date.author = commit.author.raw
           date.sha = commit.hash;
           date.message = commit.message;
           date.taskID = this.randomNum()
@@ -51,16 +52,17 @@ class BitBucket extends Component {
 
   renderBitBucket() {
     return (
-      <div>
+      <List>
       {this.state.commits.map((item, index) => <Commit 
         key={index}
+        author={item.author}
         id={item.sha}
         message={item.message}
         activeTask ={this.state.activeTask}
         taskID={item.taskID}
         />
       )}
-    </div>
+    </List>
     )
   }
 
